@@ -32,10 +32,9 @@ class CreateConversationModal{
 
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log(this.$input.value);
         db.collection('conversations')
             .add({
-                name: this.$input.value,
+                name: this.$input.getInputValue(),
                 createBy: firebase.auth().currentUser.email,
                 users: [firebase.auth().currentUser.email],
             })

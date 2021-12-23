@@ -23,7 +23,7 @@ class ConversationItem {
         this.$txtName.innerHTML = this.name;
 
         this.$txtNoOfUser = document.createElement('span');
-        this.$txtNoOfUser.innerHTML = '(' + this.users.length + ')';
+        this.$txtNoOfUser.innerHTML = this.users.length + ' member';
     }
 
     handleClick = () => {

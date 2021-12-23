@@ -23,8 +23,8 @@ class SideBar {
         this.$container.classList.add('sidebar');
 
         this.$buttonCreateConversation = document.createElement('button');
-        this.$buttonCreateConversation.innerHTML = ' + New';
-        this.$buttonCreateConversation.classList.add('btn','btn-primary', 'btn-block');
+        this.$buttonCreateConversation.innerHTML = 'New conversion';
+        this.$buttonCreateConversation.classList.add('btn','btn-new');
         this.$buttonCreateConversation.addEventListener('click', this.handleCreateConversation);
 
         this.$createConversationModal = new CreateConversationModal();

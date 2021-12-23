@@ -33,7 +33,6 @@ class SideBar {
         db.collection('conversations')
             .where('users', 'array-contains', firebase.auth().currentUser.email)
             .onSnapshot(this.conversationListener);
-
     }
 
     handleCreateConversation = () => {

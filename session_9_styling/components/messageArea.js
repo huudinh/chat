@@ -66,6 +66,7 @@ class MessageArea {
                 conversationId: this.activeConversation.id,
                 sentAt: firebase.firestore.FieldValue.serverTimestamp(),
             });
+            this.$input.value = '';
         } else {
             alert('You must select conversation first');
         }

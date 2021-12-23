@@ -13,7 +13,7 @@ class ConversationItem {
         this.id = id;
         this.name = name;
         this.users = users;
-        this.onSelectConversation = onSelectConversation
+        this.onSelectConversation = onSelectConversation;
 
         this.$container = document.createElement('div');
         this.$container.classList.add('conversation-item');
