@@ -7,6 +7,7 @@ class SideBar {
     $conversationList;
     $createConversationModal;
     $listConversationItem;
+
     updateActiveConversation;
     setActiveConversation;
     activeConversation;
@@ -45,22 +46,22 @@ class SideBar {
             const conversation = change.doc.data();
             const id = change.doc.id;
 
-            if(change.type == 'added'){
+            if (change.type == 'added') {
                 const $conversationItem = new ConversationItem(
-                    id, 
-                    conversation.name, 
-                    conversation.users, 
+                    id,
+                    conversation.name,
+                    conversation.users,
                     this.setActiveConversation
                 );
-    
+
                 this.$listConversationItem.push($conversationItem);
                 this.$conversationList.appendChild($conversationItem.render());
             } else if (change.type == 'modified') {
                 const modifyingConversation = this.$listConversationItem.find((item) => {
-                     return item.id == id;
+                    return item.id == id;
                 });
                 modifyingConversation.updateData(conversation.name, conversation.users);
-                if( id == this.activeConversation.id ){
+                if (id == this.activeConversation.id) {
                     this.updateActiveConversation(conversation.name, conversation.users);
                 }
             }
@@ -79,7 +80,7 @@ class SideBar {
         });
     };
 
-    
+
 
     render() {
         this.$container.appendChild(this.$buttonCreateConversation);
