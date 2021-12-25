@@ -89,6 +89,18 @@ class Register{
                 this.$inputGroupDisplayName.setInputValue('');
                 this.$inputGroupPassword.setInputValue('');
                 this.$inputGroupConfirmPassword.setInputValue('');
+
+                const user = firebase.auth().currentUser;
+                user.updateProfile({
+                    displayName: displayName
+                  }).then(() => {
+                    // Update successful
+                    // ...
+                  }).catch((error) => {
+                    // An error occurred
+                    // ...
+                  });  
+
             })
             .catch((error) => {
                 this.$feedbackMessage.innerHTML = error.toString();

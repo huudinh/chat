@@ -11,7 +11,7 @@ class Chat {
     $messageArea;
     $infoPanel;
 
-    constructor(){
+    constructor(user){
         this.$container = document.createElement('div');
         this.$container.classList.add('flex','h-screen');
 
@@ -19,7 +19,7 @@ class Chat {
             this.setActiveConversation,
             this.updateActiveConversation
         );
-        this.$titleBar = new TitleBar(this.setSidebarVisible);
+        this.$titleBar = new TitleBar(this.setSidebarVisible, this.setPanelVisible, user);
         this.$messageArea = new MessageArea();
         this.$infoPanel = new InfoPanel()
         
@@ -42,6 +42,10 @@ class Chat {
     setSidebarVisible = (visible) => {
         this.$sideBar.setBgContainerVisible(visible);
     };
+
+    setPanelVisible = (visible) => {
+        this.$infoPanel.setBgContainerVisible(visible);
+    }
 
     render() {
         this.$container.appendChild(this.$sideBar.render());

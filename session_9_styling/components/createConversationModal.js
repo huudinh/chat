@@ -32,15 +32,21 @@ class CreateConversationModal{
 
     handleSubmit = (event) => {
         event.preventDefault();
-        db.collection('conversations')
-            .add({
-                name: this.$input.getInputValue(),
-                createBy: firebase.auth().currentUser.email,
-                users: [firebase.auth().currentUser.email],
-            })
-            .then(() => {
-                this.setVisible(false);
-            });
+        if(this.$input.getInputValue()){
+            db.collection('conversations')
+                .add({
+                    name: this.$input.getInputValue(),
+                    createBy: firebase.auth().currentUser.email,
+                    users: [firebase.auth().currentUser.email],
+                })
+                .then(() => {
+                    this.setVisible(false);
+                });
+                this.$input.setInputValue(''); 
+        } else {
+            alert('Please type to create Conversation!')
+        }
+            
     }
     
     handleCancel = () => {

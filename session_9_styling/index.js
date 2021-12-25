@@ -4,7 +4,8 @@ import { Login } from "./components/login.js";
 
 firebase.auth().onAuthStateChanged((user) =>{
     if(user){
-        const chat = new Chat();
+        // console.log(user.displayName)
+        const chat = new Chat(user);
         setScreen(chat);
     } else{
         const login = new Login();

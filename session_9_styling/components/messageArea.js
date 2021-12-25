@@ -17,6 +17,11 @@ class MessageArea {
 
         this.$messageList = document.createElement('div');
         this.$messageList.classList.add('message-list');
+        this.$messageList.innerHTML = `
+            <div class="intro">✍️ Đây là trang chủ của <b style="color:#337ab7">APP CHAT GROUPS</b><br>
+            📝 Vui lòng Tạo mới chủ đề với: <b style="color:#5cb85c;">New conversation</b> <br>
+            🌞 Hoặc Chọn chủ đề sẵn có <b style="color:#f0ad4e">bên trái / Menu</b></div>
+        `;
 
         this.$composer = document.createElement('form');
         this.$composer.classList.add('flex', 'composer');

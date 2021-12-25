@@ -18,7 +18,6 @@ class Login{
 
         this.$container = document.createElement('div');
         this.$container.classList.add('card');
-        this.$container.style.width = '300px';
 
         this.$title = document.createElement('h3');
         this.$title.innerHTML = 'Login';

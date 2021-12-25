@@ -1,5 +1,7 @@
 class InfoPanel {
+    $bgContainer;
     $container;
+    $closeContainer;
 
     $formAddUser;
     $input;
@@ -8,13 +10,20 @@ class InfoPanel {
     activeConversation;
 
     constructor() {
+        this.$bgContainer = document.createElement('div');
+        this.$bgContainer.classList.add('panel-container');
+        this.$closeContainer = document.createElement('div')
+        
+        this.$closeContainer.classList.add('panel-close');
+        this.$closeContainer.addEventListener('click', ()=> {
+            this.setBgContainerVisible(false);
+        })
+
         this.$container = document.createElement('div');
         this.$container.classList.add('info-panel');
-        this.$container.style.width = '200px';
-        this.$container.style.borderLeft = '1px solid #eee';
 
         this.$formAddUser = document.createElement('form');
-        this.$formAddUser.classList.add('flex');
+        this.$formAddUser.classList.add('info-form');
         this.$formAddUser.addEventListener('submit', this.handleSubmit);
 
         this.$input = document.createElement('input');
@@ -70,11 +79,21 @@ class InfoPanel {
         })
     }
 
+    setBgContainerVisible = (visible) => {
+        if(visible){
+            this.$bgContainer.classList.add('visible');
+        } else {
+            this.$bgContainer.classList.remove('visible');
+        }
+    }
+
     render() {
         this.$formAddUser.appendChild(this.$input);
         this.$container.appendChild(this.$formAddUser);
         this.$container.appendChild(this.$userList);
-        return this.$container;
+        this.$bgContainer.appendChild(this.$closeContainer);
+        this.$bgContainer.appendChild(this.$container);
+        return this.$bgContainer;
     };
 }
 export { InfoPanel };

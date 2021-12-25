@@ -1,25 +1,42 @@
 class TitleBar {
     $container;
     $btnShowSidebar;
+    $btnShowPanel;
     $txtName;
     $btnLogout;
     setSidebarVisible;
+    setPanelVisible;
+    displayName;
 
-    constructor(setSidebarVisible){
+    constructor(setSidebarVisible, setPanelVisible, user){
         this.setSidebarVisible = setSidebarVisible;
+        this.setPanelVisible = setPanelVisible;
+
+        if(user.displayName){
+            this.displayName = user.displayName;
+        }else{
+            this.displayName = 'Khách';
+        }
 
         this.$container = document.createElement('div');
         this.$container.classList.add('title-bar');
 
         this.$txtName = document.createElement('div');
+        this.$txtName.classList.add('title-text');
+        this.$txtName.innerHTML = 'Welcome Chat!';
         this.$btnShowSidebar = document.createElement('div');
         this.$btnShowSidebar.classList.add('btn-show-sidebar');
         this.$btnShowSidebar.innerHTML = '☰';
         this.$btnShowSidebar.addEventListener('click', this.showSidebar);
 
-        this.$btnLogout = document.createElement('button');
-        this.$btnLogout.classList.add('btn', 'btn-secondary');
-        this.$btnLogout.innerHTML = 'Logout';
+        this.$btnShowPanel = document.createElement('div');
+        this.$btnShowPanel.classList.add('panel-icon');
+        this.$btnShowPanel.innerHTML = '⛭';
+        this.$btnShowPanel.addEventListener('click', this.showPanel)
+
+        this.$btnLogout = document.createElement('div');
+        this.$btnLogout.classList.add('logout');
+        this.$btnLogout.innerHTML = `${this.displayName} (Logout)`;
         this.$btnLogout.addEventListener('click', this.handleLogout);
 
     }
@@ -34,6 +51,9 @@ class TitleBar {
     showSidebar = () => {
         this.setSidebarVisible(true);
     }
+    showPanel = () => {
+        this.setPanelVisible(true);
+    }
     render(){
         const title = document.createElement('div');
         title.classList.add('flex');
@@ -41,7 +61,13 @@ class TitleBar {
         title.appendChild(this.$txtName);
 
         this.$container.appendChild(title);
-        this.$container.appendChild(this.$btnLogout);
+        
+        const tool = document.createElement('div');
+        tool.classList.add('tool');
+        tool.appendChild(this.$btnShowPanel);
+        tool.appendChild(this.$btnLogout);
+
+        this.$container.appendChild(tool);
         return this.$container;
     }
 }
