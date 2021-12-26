@@ -6,9 +6,12 @@ class Login{
     $screenContainer;
     $container;
     $title;
+
+    $form;
     $inputGroupEmail;
     $inputGroupPassword;
-    $form;
+
+    $feedbackMessage;
     $button;
     $linkToRegister;
 
@@ -26,7 +29,10 @@ class Login{
         this.$inputGroupPassword = new InputGroup('password', 'Password', 'password');
 
         this.$form = document.createElement('form');
-        this.$form.addEventListener('click', this.handleSubmit);
+        this.$form.addEventListener('submit', this.handleSubmit);
+
+        this.$feedbackMessage = document.createElement('div');
+        this.$feedbackMessage.classList.add('input-error');
 
         this.$btnSubmit = document.createElement('button');
         this.$btnSubmit.type = 'submit';
@@ -35,8 +41,8 @@ class Login{
         
         this.$linkToRegister = document.createElement('div');
         this.$linkToRegister.classList.add('btn-link');
-        this.$linkToRegister.addEventListener('click', this.moveToRegister);
         this.$linkToRegister.innerHTML = 'Create new account';
+        this.$linkToRegister.addEventListener('click', this.moveToRegister);
     }
 
     moveToRegister = () => {
@@ -49,14 +55,27 @@ class Login{
         evt.preventDefault();
         const email = this.$inputGroupEmail.getInputValue();
         const password = this.$inputGroupPassword.getInputValue();
+        
+        this.$inputGroupEmail.setError(null);
+        this.$inputGroupPassword.setError(null);
 
-        firebase.auth().signInWithEmailAndPassword(email, password)
-        .then((userInfo)=>{
-            console.log(userInfo);
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
+        if(!email){
+            this.$inputGroupEmail.setError('Email cannot be empty!');
+        } else if (!password){
+            this.$inputGroupPassword.setError('Password cannot be empty!');
+        } else if (password.length < 6){
+            this.$inputGroupPassword.setError('Password length must be greater or equal than 6!');
+        } else{
+            firebase.auth().signInWithEmailAndPassword(email, password)
+            .then((userInfo)=>{
+                console.log(userInfo);
+            })
+            .catch((err)=>{
+                this.$feedbackMessage.innerHTML = 'Bạn nhập sai Email / Password';
+                console.log(err)
+            })
+        }
+        
     }
     render(){
         this.$form.appendChild(this.$inputGroupEmail.render());
@@ -64,6 +83,7 @@ class Login{
         this.$form.appendChild(this.$btnSubmit);
 
         this.$container.appendChild(this.$title);
+        this.$container.appendChild(this.$feedbackMessage);
         this.$container.appendChild(this.$form);
         
         const $divider = document.createElement('hr');

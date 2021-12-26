@@ -11,6 +11,7 @@ class InputGroup{
         this.$input = document.createElement('input');
         this.$input.type = type;
         this.$input.name = name;
+        this.$input.setAttribute('autocomplete', 'off');
 
         this.$label = document.createElement('label');
         this.$label.innerHTML = label;
@@ -19,6 +20,8 @@ class InputGroup{
         this.$errorMsg.classList.add('error-msg');
 
     }
+
+   
 
     getInputValue() {
         return this.$input.value;

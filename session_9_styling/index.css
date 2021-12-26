@@ -357,6 +357,11 @@ html,body{
     padding: 5px 8px;
     display: flex;
 }
+.input-error{
+    color:#c00;
+    text-align: center;
+    font-size: 13px;
+}
 @media only screen  and (max-width:600px){
     .card{
         width: 75%;
