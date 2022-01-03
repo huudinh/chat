@@ -226,6 +226,7 @@ html,body{
     background-color: #5cb85c;
     margin:5px 0;
     color:#fff;
+    transition: .3s;
 }
 .message-item > .sender {
     font-size:10px;
@@ -235,6 +236,21 @@ html,body{
 .message-item.my-message{
     background-color:#f0ad4e;
     border-color: #eea236;
+}
+.message-item:hover, .message-item.my-message:hover{
+    background: #d9534f;
+    cursor: pointer;
+    border-color: #d9534f;
+    position: relative;
+    padding-right: 25px;
+}
+.message-item:hover::before, .message-item.my-message:hover::before{
+    content: '✕';
+    display: block;
+    position: absolute;
+    right:5px;
+    top:5px;
+    font-size:11px;
 }
 .info-panel{
     overflow-x: hidden;
@@ -380,15 +396,6 @@ html,body{
         animation: opac 0.4s;
         z-index: 2;
     }
-    @keyframes opac {
-        from {
-            opacity: 0;
-        }
-    
-        to {
-            opacity: 1;
-        }
-    }
     .sidebar-container.visible .sidebar{
         animation: animateleft 0.4s;
     }
@@ -461,6 +468,15 @@ html,body{
     
         to {
             right: 0;
+            opacity: 1;
+        }
+    }
+    @keyframes opac {
+        from {
+            opacity: 0;
+        }
+    
+        to {
             opacity: 1;
         }
     }

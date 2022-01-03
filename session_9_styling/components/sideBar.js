@@ -8,6 +8,7 @@ class SideBar {
     $conversationList;
     $createConversationModal;
     $listConversationItem;
+    
     updateActiveConversation;
     setActiveConversation;
     activeConversation;

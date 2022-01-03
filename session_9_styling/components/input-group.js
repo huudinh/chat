@@ -18,10 +18,7 @@ class InputGroup{
 
         this.$errorMsg = document.createElement('div');
         this.$errorMsg.classList.add('error-msg');
-
     }
-
-   
 
     getInputValue() {
         return this.$input.value;

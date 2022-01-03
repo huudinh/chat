@@ -46,7 +46,7 @@ class ConversationItem {
         this.name = name;
         this.users = users;
         this.$txtName.innerHTML = name;
-        this.$txtNoOfUser.innerHTML = '(' + users.length + ')';
+        this.$txtNoOfUser.innerHTML = this.users.length + ' member';
     }
 
     render() {

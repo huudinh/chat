@@ -50,14 +50,42 @@ class MessageArea {
             .orderBy('sentAt')
             .onSnapshot(this.messageListener);
     };
+    
+    handleDeleteMessage = (id) => {
+        console.log(this.activeConversation);
+        db.collection("messages").doc(id).delete().then(() => {
+            console.log('ban vua xoa id', id);
+            console.log("Document successfully deleted!");
+
+            this.$messageList.innerHTML = '';
+            if(this.messageSubscribe){
+                this.messageSubscribe();
+            }
+            this.messageSubscribe = db
+                .collection('messages')
+                .where('conversationId', '==', this.activeConversation.id)
+                .orderBy('sentAt')
+                .onSnapshot(this.messageListener);
+                
+            
+        }).catch((error) => {
+            console.error("Error removing document: ", error);
+        });
+    }
 
     messageListener = (snapshot) => {
         snapshot.docChanges().forEach((change) => {
+            let deleteMessage = (id) => {
+                this.handleDeleteMessage(id);
+            }
             if (change.type == 'added'){
                 const data = change.doc.data();
-                const $messageItem = new MessageItem(data.sender, data.content);
+                const id = change.doc.id;
+                const $messageItem = new MessageItem(data.sender, data.content, id, deleteMessage);
+               
                 this.$messageList.insertBefore($messageItem.render(), this.$messageList.childNodes[0]);
             }
+            
         });
     };
     

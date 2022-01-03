@@ -3,10 +3,16 @@ class MessageItem {
     $messageContainer;
     $sender;
     $content;
+    deleteMessage;
 
-    constructor(sender, content) {
+    constructor(sender, content, id, deleteMessage) {
         this.$container = document.createElement('div');
         this.$container.classList.add('flex');
+
+        this.deleteMessage = deleteMessage;
+        this.$container.addEventListener('click', ()=>{
+            this.deleteMessage(id);
+        })
         
         this.$messageContainer = document.createElement('div');
         this.$messageContainer.classList.add('message-item');
